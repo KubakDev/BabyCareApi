@@ -99,7 +99,7 @@ StyleCopReport.xml
 *.pidb
 *.svclog
 *.scc
-
+*.sonarqube
 # Chutzpah Test files
 _Chutzpah*
 
