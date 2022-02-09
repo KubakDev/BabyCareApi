@@ -7,15 +7,14 @@ public static class RoleAudience
   public static Role[] GetRoles(this Audience audience) =>
   audience switch
   {
-    Audience.CustomerApp => new[] { Role.Customer },
+    Audience.UserApp => new[] { Role.User },
     Audience.AdminWebPanel => new[] { Role.Admin },
-    _ => new[] { Role.Driver, Role.Staff }
+    _ => new[] { Role.AdManager, Role.Admin, Role.Analyst }
   };
   public static Audience GetAudience(this Role role) =>
   role switch
   {
     Role.Admin => Audience.AdminWebPanel,
-    Role.Customer => Audience.CustomerApp,
-    _ => Audience.StaffApp,
+    Role.User => Audience.UserApp,
   };
 }
