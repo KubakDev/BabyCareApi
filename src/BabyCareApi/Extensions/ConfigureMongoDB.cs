@@ -1,4 +1,5 @@
 using BabyCareApi.Models;
+using BabyCareApi.Models.Auth;
 using BabyCareApi.Settings;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
@@ -19,6 +20,8 @@ public static partial class StartupConfigurations
     .AddSingleton(ClientImplementationFactory)
     .AddSingleton(DatabaseImplementationFactory)
     .AddSingleton(sp => CollectionImplementationFactory<User>(sp, "users"))
+    .AddSingleton(sp => CollectionImplementationFactory<RefreshToken>(sp, "refresh_tokens"))
+
     ;
   }
 
@@ -36,7 +39,7 @@ public static partial class StartupConfigurations
     var config = serviceProvider.GetRequiredService<IOptions<MongoDbOptions>>();
     var mongoClient = serviceProvider.GetRequiredService<IMongoClient>();
 
-    return mongoClient.GetDatabase(config.Value.ConnectionString);
+    return mongoClient.GetDatabase(config.Value.DatabaseName);
   }
 
   public static IMongoCollection<T> CollectionImplementationFactory<T>(IServiceProvider serviceProvider, in string collectionName)
