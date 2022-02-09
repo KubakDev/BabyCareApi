@@ -35,7 +35,7 @@ public class CreateUser : IValidatableObject
   public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
   {
     // TODO what yield means at here?
-    if (Role is Role.Customer)
+    if (Role is Role.User)
       yield return new ValidationResult("User with role 'Customer' must be registered.", new[] { nameof(Role) });
   }
 
