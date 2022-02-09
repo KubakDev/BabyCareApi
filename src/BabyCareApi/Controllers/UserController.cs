@@ -11,31 +11,33 @@ using System.Security.Claims;
 using BabyCareApi.Extensions;
 
 namespace BabyCareApi.Controllers;
-
 [Authorize(Roles = Roles.Admin)]
 [ApiController]
 [Produces(MediaTypeNames.Application.Json)]
 [Route("v1/users")]
-
-public class UserController : ControllerBase
+public class UsersController : ControllerBase
 {
+
   private readonly UserService _UserService;
-  public UserController(UserService userService)
+
+  public UsersController(UserService userService)
   {
     _UserService = userService;
-
   }
 
   [HttpGet]
-  public async Task<List<User>> ListUsers([FromQuery] ListUsers model) => await _UserService.ListAsync(model);
-
+  public async Task<List<User>> ListUsers([FromQuery] ListUsers model)
+  {
+    return await _UserService.ListAsync(model);
+  }
 
   [HttpGet("{id}")]
   public async Task<ActionResult<User>> GetUserById([IsBsonId] string id)
   {
     var user = await _UserService.GetByIdAsync(id);
 
-    if (user is null) return NotFound();
+    if (user is null)
+      return NotFound();
 
     return Ok(user);
   }
@@ -56,7 +58,6 @@ public class UserController : ControllerBase
     return CreatedAtAction(nameof(CreateUser), user);
   }
 
-
   [HttpPut("{id}")]
   public async Task<ActionResult<User>> UpdateUser([IsBsonId] string id, UpdateUser model)
   {
@@ -69,6 +70,8 @@ public class UserController : ControllerBase
     if (model.Username != null && model.Username != user.Username && await _UserService.UsernameExistsAsync(model.Username))
       return BadRequest();
 
+    if (model.Password != null)
+      model.Password = model.Password;
 
     // Do not allow changing status of self
     if (model.Status != null && id == User.GetId())
