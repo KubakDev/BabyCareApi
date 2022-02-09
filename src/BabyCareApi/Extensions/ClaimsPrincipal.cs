@@ -10,7 +10,7 @@ public static class ClaimsPrincipalExtensions
     var roleStr = user.FindFirstValue(ClaimTypes.Role);
 
     if (string.IsNullOrEmpty(roleStr))
-      return Role.Customer;
+      return Role.User;
 
     return Enum.Parse<Role>(roleStr);
 
