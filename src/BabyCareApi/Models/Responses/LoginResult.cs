@@ -1,3 +1,5 @@
+using BabyCareApi.Models.Common;
+
 namespace BabyCareApi.Models.Responses;
 
 public class LoginResult
