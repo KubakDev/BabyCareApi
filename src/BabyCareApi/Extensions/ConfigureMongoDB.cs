@@ -1,5 +1,6 @@
 using BabyCareApi.Models;
 using BabyCareApi.Models.Auth;
+using BabyCareApi.Models.Common;
 using BabyCareApi.Settings;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
@@ -21,6 +22,7 @@ public static partial class StartupConfigurations
     .AddSingleton(DatabaseImplementationFactory)
     .AddSingleton(sp => CollectionImplementationFactory<User>(sp, "users"))
     .AddSingleton(sp => CollectionImplementationFactory<RefreshToken>(sp, "refresh_tokens"))
+    .AddSingleton(sp => CollectionImplementationFactory<Ad>(sp, "ads"))
 
     ;
   }
