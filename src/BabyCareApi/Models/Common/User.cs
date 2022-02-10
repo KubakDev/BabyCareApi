@@ -4,7 +4,7 @@ using BabyCareApi.Models.Common;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace BabyCareApi.Models;
+namespace BabyCareApi.Models.Common;
 
 public class User
 {

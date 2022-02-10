@@ -1,6 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using BabyCareApi.Models;
 using BabyCareApi.Models.Auth;
+using BabyCareApi.Models.Common;
 
 namespace BabyCareteApi.Models.Requests;
 
@@ -21,6 +22,9 @@ public class CreateUser : IValidatableObject
   [Required]
   public Role Role { get; set; }
 
+  public string Gender { get; set; } = string.Empty;
+
+  public PregnancyState PregnancyState { get; set; }
   public User ToUser(DateTime creationTime)
         => new()
         {
