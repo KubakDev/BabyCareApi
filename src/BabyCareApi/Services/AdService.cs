@@ -49,7 +49,7 @@ public class AdService
     return await GetByIdAsync(id);
 
   }
-  public async Task<Ad?> IncrementReach(string id)
+  public async Task<Ad?> IncrementReachAsync(string id)
   {
     return await Collection.FindOneAndUpdateAsync(Filter.Eq(x => x.Id, id), Update.Inc(x => x.Reach, 1));
 

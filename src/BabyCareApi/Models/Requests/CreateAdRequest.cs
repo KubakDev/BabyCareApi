@@ -1,4 +1,6 @@
+using System.Text.Json.Serialization;
 using BabyCareApi.Models.Common;
+using MongoDB.Bson.Serialization.Attributes;
 
 namespace BabyCareApi.Models.Requests;
 
@@ -12,7 +14,8 @@ public class CreateAdRequest
   public IEnumerable<string>? Videos { get; set; } = Array.Empty<string>();
   public AdPlacement AdPlacement { get; set; } = AdPlacement.Top;
   public Priority Priority { get; set; } = Priority.Medium;
-
+  [JsonIgnore]
+  public int Reach { get; set; } = 0;
   public Ad ToAd(int Reach)
          => new()
          {
