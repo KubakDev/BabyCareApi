@@ -49,6 +49,11 @@ public class AdService
     return await GetByIdAsync(id);
 
   }
+  public async Task<Ad?> IncrementReach(string id)
+  {
+    return await Collection.FindOneAndUpdateAsync(Filter.Eq(x => x.Id, id), Update.Inc(x => x.Reach, 1));
+
+  }
   public Task<List<Ad>> ListAsync(ListAds model)
   {
     var sort = new SortOptions("title", model.SortDescending);
