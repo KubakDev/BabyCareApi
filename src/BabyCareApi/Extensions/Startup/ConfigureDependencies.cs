@@ -9,6 +9,7 @@ public static partial class StartupConfigurations
   {
     services
         .AddScoped<UserService>()
+        .AddScoped<AdService>()
         .AddScoped<RefreshTokenService>()
     ;
 
