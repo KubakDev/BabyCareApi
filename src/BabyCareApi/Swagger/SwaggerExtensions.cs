@@ -13,7 +13,7 @@ public static partial class SwaggerExtensions
       c.SwaggerDoc("v1",
               new OpenApiInfo
               {
-                Title = "Orbit Food Api",
+                Title = "Baby Care Api",
                 Version = $"v{Version.ApiVersion}"
               });
 
