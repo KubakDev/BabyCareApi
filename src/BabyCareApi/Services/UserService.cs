@@ -1,5 +1,4 @@
 using BabyCareApi.Extensions;
-using BabyCareApi.Models;
 using BabyCareApi.Models.Auth;
 using BabyCareApi.Models.Common;
 using BabyCareApi.Models.Requests;
@@ -89,14 +88,14 @@ public class UserService
     if (model.DisplayName != null)
       updates.Add(Update.Set(x => x.DisplayName, model.DisplayName));
 
-    if (model.Password != null)
-      updates.Add(Update.Set(x => x.Password, model.Password));
+    if (model.Address != null)
+      updates.Add(Update.Set(x => x.Address, model.Address));
 
     if (model.Status != null)
       updates.Add(Update.Set(x => x.Status, model.Status));
 
-    if (model.Address != null)
-      updates.Add(Update.Set(x => x.Address, model.Address));
+    if (model.Password != null)
+      updates.Add(Update.Set(x => x.Password, model.Password));
 
     if (updates.Any())
       return await Collection.FindOneAndUpdateAsync(Filter.Eq(x => x.Id, id), Update.Combine(updates), _ReturnAfter);
@@ -132,6 +131,12 @@ public class UserService
 
     if (!string.IsNullOrEmpty(model.SearchText))
       filter &= Filter.Regex(x => x.Username, $"/^{model.SearchText}/i");
+
+    if (model.IsVerified is not null)
+      filter &= Filter.Eq(x => x.IsVerified, model.IsVerified);
+
+    if (model.Status is not null)
+      filter &= Filter.Eq(x => x.Status, model.Status);
 
     if (string.IsNullOrEmpty(model.LastSeenUsername))
       return filter;

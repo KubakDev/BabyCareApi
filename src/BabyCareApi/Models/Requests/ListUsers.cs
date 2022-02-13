@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using BabyCareApi.Models.Auth;
+using BabyCareApi.Models.Common;
 
 namespace BabyCareApi.Models.Requests;
 
@@ -14,7 +15,8 @@ public class ListUsers
 
   [Required]
   public Role Role { get; set; }
-
+  public bool? IsVerified { get; set; }
+  public UserStatus? Status { get; set; }
   public string? SearchText { get; set; }
 
   // <summary>
