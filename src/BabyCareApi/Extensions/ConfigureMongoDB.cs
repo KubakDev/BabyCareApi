@@ -23,6 +23,9 @@ public static partial class StartupConfigurations
     .AddSingleton(sp => CollectionImplementationFactory<User>(sp, "users"))
     .AddSingleton(sp => CollectionImplementationFactory<RefreshToken>(sp, "refresh_tokens"))
     .AddSingleton(sp => CollectionImplementationFactory<Ad>(sp, "ads"))
+    .AddSingleton(sp => CollectionImplementationFactory<Advice>(sp, "advices"))
+    .AddSingleton(sp => CollectionImplementationFactory<Category>(sp, "categories"))
+    .AddSingleton(sp => CollectionImplementationFactory<Child>(sp, "children"))
 
     ;
   }
