@@ -29,7 +29,7 @@ public class User
 
   public UserStatus Status { get; set; }
 
-
-
   public DateTime? CreatedAt { get; set; }
+  public IEnumerable<string> Diseases { get; set; } = Array.Empty<string>();
+
 }
