@@ -66,7 +66,7 @@ public class ChildService
 
   private static FilterDefinition<Child> GetFilterDefinition(in ListChildren model)
   {
-    var filter = Filter.Empty;
+    var filter = Filter.Eq(x => x.ParentId, model.ParentId);
     // var textSearch = Filter.Text(model.SearchText);
     if (!string.IsNullOrEmpty(model.SearchText))
       filter &= Filter.Regex(x => x.DisplayName, $"/^{model.SearchText}/i");

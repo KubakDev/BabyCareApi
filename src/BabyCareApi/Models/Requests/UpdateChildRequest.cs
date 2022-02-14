@@ -5,10 +5,6 @@ namespace BabyCareApi.Models.Requests;
 
 public class UpdateChildRequest
 {
-  [Required]
-  [BsonId]
-  [BsonRepresentation(MongoDB.Bson.BsonType.ObjectId)]
-  public string? ParentId { get; set; } = string.Empty;
   public string? DisplayName { get; set; }
   public DateTime? Birthdate { get; set; }
   public Gender? Gender { get; set; }

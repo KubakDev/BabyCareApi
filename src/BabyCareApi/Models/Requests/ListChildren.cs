@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using BabyCareApi.Models.Common;
+using MongoDB.Bson.Serialization.Attributes;
 
 namespace BabyCareApi.Models.Requests;
 
@@ -10,6 +11,9 @@ namespace BabyCareApi.Models.Requests;
 public class ListChildren
 {
 
+  [BsonId]
+  [BsonRepresentation(MongoDB.Bson.BsonType.ObjectId)]
+  public string ParentId { get; set; } = string.Empty;
 
   [Range(0, 100)]
   public int Limit { get; set; } = 2;

@@ -1,11 +1,14 @@
 using System.ComponentModel.DataAnnotations;
 using BabyCareApi.Models.Common;
+using MongoDB.Bson.Serialization.Attributes;
 
 namespace BabyCareApi.Models.Requests;
 
 public class CreateChildRequest
 {
-
+  [BsonId]
+  [BsonRepresentation(MongoDB.Bson.BsonType.ObjectId)]
+  public string ParentId { get; set; } = string.Empty;
   [Required]
   public string DisplayName { get; set; }
   public DateTime? Birthdate { get; set; }
@@ -24,6 +27,7 @@ public class CreateChildRequest
         CreatedAt = creationTime,
         UpdatedAt = creationTime,
         Diseases = Diseases,
+        ParentId = ParentId
       };
 
 }
