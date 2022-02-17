@@ -1,4 +1,5 @@
 
+using BabyCareApi.Service;
 using BabyCareApi.Services;
 
 namespace BabyCareApi.Extensions;
@@ -12,8 +13,10 @@ public static partial class StartupConfigurations
         .AddScoped<AdviceService>()
         .AddScoped<CategoryService>()
         .AddScoped<ChildService>()
+        .AddScoped<QuestionService>()
         .AddScoped<RefreshTokenService>()
         .AddScoped<UserService>()
+        .AddScoped<SurveyService>()
     ;
 
     services

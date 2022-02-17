@@ -20,12 +20,14 @@ public static partial class StartupConfigurations
     return services
     .AddSingleton(ClientImplementationFactory)
     .AddSingleton(DatabaseImplementationFactory)
-    .AddSingleton(sp => CollectionImplementationFactory<User>(sp, "users"))
-    .AddSingleton(sp => CollectionImplementationFactory<RefreshToken>(sp, "refresh_tokens"))
     .AddSingleton(sp => CollectionImplementationFactory<Ad>(sp, "ads"))
     .AddSingleton(sp => CollectionImplementationFactory<Advice>(sp, "advices"))
     .AddSingleton(sp => CollectionImplementationFactory<Category>(sp, "categories"))
     .AddSingleton(sp => CollectionImplementationFactory<Child>(sp, "children"))
+    .AddSingleton(sp => CollectionImplementationFactory<Question>(sp, "questions"))
+    .AddSingleton(sp => CollectionImplementationFactory<Survey>(sp, "surveys"))
+    .AddSingleton(sp => CollectionImplementationFactory<User>(sp, "users"))
+    .AddSingleton(sp => CollectionImplementationFactory<RefreshToken>(sp, "refresh_tokens"))
 
     ;
   }
