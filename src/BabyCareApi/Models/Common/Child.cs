@@ -7,7 +7,6 @@ public class Child
   [BsonId]
   [BsonRepresentation(MongoDB.Bson.BsonType.ObjectId)]
   public string Id { get; set; } = string.Empty;
-  [BsonId]
   [BsonRepresentation(MongoDB.Bson.BsonType.ObjectId)]
   public string ParentId { get; set; } = string.Empty;
   public string DisplayName { get; set; } = string.Empty;
