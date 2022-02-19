@@ -38,9 +38,10 @@ public class CreateUser : IValidatableObject
 
   public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
   {
-    // TODO what yield means at here?
+    // yield is used for example if we had more validations we could return them with yield, but without it the return statement will not return the other validations below the returned(first) one
     if (Role is Role.User)
-      yield return new ValidationResult("User with role 'Customer' must be registered.", new[] { nameof(Role) });
+      yield return new ValidationResult("User with role 'User' must be registered.", new[] { nameof(Role) });
+
   }
 
 }
