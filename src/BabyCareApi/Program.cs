@@ -9,17 +9,19 @@ var services = builder.Services;
 var config = builder.Configuration;
 
 
-services.AddControllers();
-
 services
 .ConfigureMongoDB(config)
 .AddEndpointsApiExplorer()
 .AddSwaggerGen()
 .ConfigureAuthentication(config);
+
 services
             .AddHttpClient()
             .ConfigureSwaggerGenerator(config)
-            .AddControllers()
+            .AddControllers(options =>
+            {
+              _ = options.Filters.Add<UnhandledExceptionFilter>();
+            })
             .AddJsonOptions(x =>
             {
               x.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
@@ -35,8 +37,8 @@ app
 .UseSwagger()
 .UseSwaggerUI()
 .UseHttpsRedirection()
-.UseAuthorization()
-.UseAuthentication();
+.UseAuthentication()
+.UseAuthorization();
 
 app.MapControllers();
 
