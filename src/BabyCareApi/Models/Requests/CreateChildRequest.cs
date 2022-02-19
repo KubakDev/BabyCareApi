@@ -6,6 +6,7 @@ namespace BabyCareApi.Models.Requests;
 
 public class CreateChildRequest
 {
+  [Required]
   [BsonId]
   [BsonRepresentation(MongoDB.Bson.BsonType.ObjectId)]
   public string ParentId { get; set; } = string.Empty;
