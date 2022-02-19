@@ -1,6 +1,5 @@
 using System.ComponentModel.DataAnnotations;
 using System.Net.Mime;
-using BabyCareApi.Models;
 using BabyCareApi.Models.Auth;
 using BabyCareApi.Models.Requests;
 using BabyCareApi.Services;
@@ -11,8 +10,9 @@ using BabyCareApi.Extensions;
 using BabyCareApi.Models.Common;
 
 namespace BabyCareApi.Controllers;
-[Authorize(Roles = Roles.Admin)]
+// [Authorize(Roles = Roles.Admin)]
 [ApiController]
+[Consumes(MediaTypeNames.Application.Json)]
 [Produces(MediaTypeNames.Application.Json)]
 [Route("v1/users")]
 public class UsersController : ControllerBase
@@ -26,9 +26,9 @@ public class UsersController : ControllerBase
   }
 
   [HttpGet]
-  public async Task<List<User>> ListUsers([FromQuery] ListUsers model)
+  public Task<List<User>> ListUsers([FromQuery] ListUsers model)
   {
-    return await _UserService.ListAsync(model);
+    return _UserService.ListAsync(model);
   }
 
   [HttpGet("{id}")]
