@@ -10,6 +10,10 @@ public class AdviceService
 {
   private static readonly FilterDefinitionBuilder<Advice> Filter = Builders<Advice>.Filter;
   private static readonly UpdateDefinitionBuilder<Advice> Update = Builders<Advice>.Update;
+  private static readonly FindOneAndUpdateOptions<Advice> _ReturnAfter = new()
+  {
+    ReturnDocument = ReturnDocument.After
+  };
 
   public IMongoCollection<Advice> Collection { get; set; }
   public AdviceService(IMongoCollection<Advice> adviceCollection)
@@ -37,7 +41,7 @@ public class AdviceService
       updates.Add(Update.Set(x => x.CategoryId, model.CategoryId));
 
     if (updates.Any())
-      return await Collection.FindOneAndUpdateAsync(Filter.Eq(x => x.Id, id), Update.Combine(updates));
+      return await Collection.FindOneAndUpdateAsync(Filter.Eq(x => x.Id, id), Update.Combine(updates), _ReturnAfter);
 
     return await GetByIdAsync(id);
 
@@ -62,8 +66,10 @@ public class AdviceService
       filter &= Filter.Regex(x => x.Title, $"/^{model.SearchText}");
 
     if (model.Tags is not null)
-      filter &= Filter.AnyIn(x => x.Tags, model.Tags);
+      filter &= Filter.All(x => x.Tags, model.Tags);
 
+    if (model.CategoryId is not null)
+      filter &= Filter.Eq(x => x.CategoryId, model.CategoryId);
 
     return filter;
   }
