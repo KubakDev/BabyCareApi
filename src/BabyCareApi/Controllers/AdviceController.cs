@@ -5,11 +5,15 @@ using BabyCareApi.Models.Requests;
 using BabyCareApi.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Net.Mime;
+using BabyCareApi.Models.Auth;
 
 namespace BabyCareApi.Controllers;
 
 [ApiController]
-[Authorize]
+[Authorize(Roles = Roles.Admin)]
+[Consumes(MediaTypeNames.Application.Json)]
+[Produces(MediaTypeNames.Application.Json)]
 [Route("v1/advices")]
 public class AdviceController : ControllerBase
 {

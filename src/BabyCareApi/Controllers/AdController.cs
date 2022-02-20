@@ -1,13 +1,17 @@
 using System.ComponentModel.DataAnnotations;
 using System.Net.Mime;
+using BabyCareApi.Models.Auth;
 using BabyCareApi.Models.Common;
 using BabyCareApi.Models.Requests;
 using BabyCareApi.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BabyCareApi.Controllers;
 
 [ApiController]
+[Authorize(Roles = Roles.Admin)]
+[Consumes(MediaTypeNames.Application.Json)]
 [Produces(MediaTypeNames.Application.Json)]
 [Route("v1/ads")]
 public class AdController : ControllerBase
