@@ -10,7 +10,7 @@ namespace BabyCareApi.Models.Requests;
 // </summary>
 public class ListChildren
 {
-
+  [Required]
   [BsonId]
   [BsonRepresentation(MongoDB.Bson.BsonType.ObjectId)]
   public string ParentId { get; set; } = string.Empty;
