@@ -18,10 +18,7 @@ services
 services
             .AddHttpClient()
             .ConfigureSwaggerGenerator(config)
-            .AddControllers(options =>
-            {
-              _ = options.Filters.Add<UnhandledExceptionFilter>();
-            })
+            .AddControllers()
             .AddJsonOptions(x =>
             {
               x.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
