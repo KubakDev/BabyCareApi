@@ -81,14 +81,8 @@ public class ChildService
       return filter &= Filter.Lt(x => x.Birthdate, model.BornTo);
 
     if (model.Diseases is not null)
-    {
-      for (int i = 0; i < model.Diseases.Count; i++)
-      {
-        string Disease = model.Diseases[i];
-        filter &= Filter.ElemMatch(x => x.Diseases, disease => disease.StartsWith(Disease));
-      }
+      filter &= Filter.All(x => x.Diseases, model.Diseases);
 
-    }
 
     filter &= model.SortDescending is true
        ? Filter.Lt(x => x.DisplayName, model.LastSeenDisplayName)

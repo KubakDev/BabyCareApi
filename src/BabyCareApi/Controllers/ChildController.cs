@@ -4,11 +4,14 @@ using BabyCareApi.Models.Requests;
 using BabyCareApi.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using MongoDB.Driver;
-
+using System.Net.Mime;
+using BabyCareApi.Models.Auth;
 namespace BabyCareApi.Controllers;
-[Authorize]
+// [Authorize(Roles = Roles.Admin)]
 [ApiController]
+[Authorize(Roles = Roles.Admin)]
+[Consumes(MediaTypeNames.Application.Json)]
+[Produces(MediaTypeNames.Application.Json)]
 [Route("v1/chilren")]
 
 public class ChildController : ControllerBase

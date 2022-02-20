@@ -71,51 +71,11 @@ public class TokenService
     return new(tokenId, token, expires);
   }
 
-  public string GenerateInvoiceToken(in long orderId)
-  {
-    var claims = new List<Claim>
-            {
-                new Claim("order_id", orderId.ToString())
-            };
-
-    var tokenHandler = new JwtSecurityTokenHandler();
-    var tokenDescriptor = new SecurityTokenDescriptor
-    {
-      Issuer = _AuthOptions.Issuer,
-      Subject = new(claims),
-      Expires = DateTime.UtcNow + TimeSpan.FromDays(7),
-      SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(_AuthOptions.SecretBytes), SecurityAlgorithms.HmacSha256Signature)
-    };
-
-    var securityToken = tokenHandler.CreateToken(tokenDescriptor);
-    var token = tokenHandler.WriteToken(securityToken);
-
-    return token;
-  }
 
   public ClaimsPrincipal GetUserFromToken(string token)
   {
     var tokenHandler = new JwtSecurityTokenHandler();
     var principal = tokenHandler.ValidateToken(token, _ExpiredTokenValidation, out var securityToken);
-
-    if (securityToken is not JwtSecurityToken jwtSecurityToken || !jwtSecurityToken.Header.Alg.Equals(SecurityAlgorithms.HmacSha256, StringComparison.InvariantCultureIgnoreCase))
-      throw new SecurityTokenException("Invalid Token");
-
-    return principal;
-  }
-
-  public ClaimsPrincipal DecodeInvoiceToken(in string token)
-  {
-    var tokenHandler = new JwtSecurityTokenHandler();
-    var validationParams = new TokenValidationParameters
-    {
-      ValidateAudience = false,
-      ValidateIssuerSigningKey = true,
-
-      ValidIssuer = _AuthOptions.Issuer,
-      IssuerSigningKey = new SymmetricSecurityKey(_AuthOptions.SecretBytes),
-    };
-    var principal = tokenHandler.ValidateToken(token, validationParams, out var securityToken);
 
     if (securityToken is not JwtSecurityToken jwtSecurityToken || !jwtSecurityToken.Header.Alg.Equals(SecurityAlgorithms.HmacSha256, StringComparison.InvariantCultureIgnoreCase))
       throw new SecurityTokenException("Invalid Token");

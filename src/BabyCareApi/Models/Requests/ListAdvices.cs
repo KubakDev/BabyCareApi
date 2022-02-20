@@ -10,4 +10,6 @@ public class ListAdvices
   public string? SearchText { get; set; }
   public bool? SortDescending { get; set; } = true;
   public IEnumerable<string>? Tags { get; set; }
+  public string? CategoryId { get; set; }
+
 }

@@ -13,6 +13,7 @@ using static BabyCareApi.Services.TokenService;
 namespace BabyCareApi.Controllers;
 
 [ApiController]
+[Consumes(MediaTypeNames.Application.Json)]
 [Produces(MediaTypeNames.Application.Json)]
 [Route("v1/auth")]
 
@@ -42,7 +43,7 @@ public class AuthController : ControllerBase
 
 
   [HttpGet("self")]
-  public Task<User> GetSelf() => _UserService.GetByIdAsync(User.GetId());
+  public Task<User> GetSelf() => _UserService.GetByIdAsync(User.GetId()) as Task<User>;
 
 
   // TODO: Implement register
