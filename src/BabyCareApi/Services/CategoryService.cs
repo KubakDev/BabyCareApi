@@ -10,7 +10,10 @@ public class CategoryService
 {
   private static readonly FilterDefinitionBuilder<Category> Filter = Builders<Category>.Filter;
   private static readonly UpdateDefinitionBuilder<Category> Update = Builders<Category>.Update;
-
+  private static readonly FindOneAndUpdateOptions<Category> _ReturnAfter = new()
+  {
+    ReturnDocument = ReturnDocument.After
+  };
   public IMongoCollection<Category> Collection { get; set; }
 
   public CategoryService(IMongoCollection<Category> categoryCollection)
@@ -21,7 +24,7 @@ public class CategoryService
 
   public Task CreateAsync(Category model) => Collection.InsertOneAsync(model);
 
-  public async Task<Category?> UpdateAsync(string id, CreateCategoryRequest model) => await Collection.FindOneAndUpdateAsync(Filter.Eq(x => x.Id, id), Update.Set(x => x.Name, model.Name));
+  public Task<Category?> UpdateAsync(string id, CreateCategoryRequest model) => Collection.FindOneAndUpdateAsync(Filter.Eq(x => x.Id, id), Update.Set(x => x.Name, model.Name), _ReturnAfter);
 
   public Task<List<Category>> ListAsync(ListCategories model)
   {
