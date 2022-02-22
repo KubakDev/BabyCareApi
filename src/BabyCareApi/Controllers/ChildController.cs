@@ -12,7 +12,7 @@ namespace BabyCareApi.Controllers;
 [Authorize(Roles = Roles.Admin)]
 [Consumes(MediaTypeNames.Application.Json)]
 [Produces(MediaTypeNames.Application.Json)]
-[Route("v1/chilren")]
+[Route("v1/children")]
 
 public class ChildController : ControllerBase
 {
