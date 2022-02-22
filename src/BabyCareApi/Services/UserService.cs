@@ -4,7 +4,10 @@ using BabyCareApi.Models.Common;
 using BabyCareApi.Models.Requests;
 using MongoDB.Driver;
 using OrbitFoodApi.Models.Common;
-
+using BabyCareApi.Services;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using System.Net.Mime;
 namespace BabyCareApi.Services;
 public class UserService
 {
@@ -82,8 +85,6 @@ public class UserService
   {
     var updates = new List<UpdateDefinition<User>>();
 
-    if (model.Username != null)
-      updates.Add(Update.Set(x => x.Username, model.Username));
 
     if (model.DisplayName != null)
       updates.Add(Update.Set(x => x.DisplayName, model.DisplayName));
