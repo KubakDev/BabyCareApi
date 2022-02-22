@@ -65,13 +65,7 @@ public class UsersController : ControllerBase
     if (user is null)
       return NotFound();
 
-    model.Username = model.Username?.ToLowerInvariant();
-
-    if (model.Username != null && model.Username != user.Username && await _UserService.UsernameExistsAsync(model.Username))
-      return BadRequest();
-
-    if (model.Password != null)
-      model.Password = model.Password;
+    if (model.Password != null && user.Role == Role.User && User.GetRole() != Role.User) return BadRequest("Cannot change user's password");
 
     // Do not allow changing status of self
     if (model.Status != null && id == User.GetId())

@@ -5,9 +5,6 @@ namespace BabyCareApi.Models.Requests;
 
 public class UpdateUser
 {
-  [StringLength(20, MinimumLength = 3)]
-  public string? Username { get; set; }
-
   [StringLength(64, MinimumLength = 3)]
   public string? DisplayName { get; set; }
 
