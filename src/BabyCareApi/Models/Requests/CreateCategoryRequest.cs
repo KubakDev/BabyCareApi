@@ -13,6 +13,6 @@ public class CreateCategoryRequest
   public Category ToCategory(DateTime CreationTime) => new()
   {
     Name = Name,
-    CreatedAd = CreationTime
+    CreatedAt = CreationTime
   };
 }

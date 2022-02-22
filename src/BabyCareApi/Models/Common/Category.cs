@@ -8,6 +8,6 @@ public class Category
   [BsonRepresentation(MongoDB.Bson.BsonType.ObjectId)]
   public string Id { get; set; } = string.Empty;
   public string Name { get; set; } = string.Empty;
-  public DateTime CreatedAd { get; set; }
+  public DateTime CreatedAt { get; set; }
 
 }
